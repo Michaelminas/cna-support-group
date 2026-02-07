@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - C&A Support Group | Western Sydney</title>
+    <meta name="description" content="Compassionate in-home support services including daily living assistance, companionship, family support and household help in Western Sydney.">
+    <meta name="keywords" content="in-home support, daily living assistance, companionship, family support, Western Sydney care">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage: #7A9D6F;
+            --sage-light: #A8C79E;
+            --sage-dark: #5A7D4F;
+            --forest: #3D5A35;
+
+            --cream: #F9F6F0;
+            --warm-white: #FFFDF9;
+            --soft-beige: #EDE8DD;
+            --terracotta: #E4B789;
+
+            --text-primary: #1F2F1F;
+            --text-secondary: #3D4D3D;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.75;
+            background: var(--warm-white);
+            font-size: 18px;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 0.75rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .header:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 120px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:not(.cta-button)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--sage);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav a:not(.cta-button):hover::after {
+            width: 80%;
+        }
+
+        .nav a:hover {
+            color: var(--sage-dark);
+        }
+
+        .nav .cta-button {
+            background: var(--sage);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(122, 157, 111, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav .cta-button:hover {
+            background: var(--sage-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(122, 157, 111, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--warm-white);
+            min-height: 70vh;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 3.25rem;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .section-intro {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border: 2px solid var(--soft-beige);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--sage);
+            box-shadow: 0 12px 32px rgba(122, 157, 111, 0.2);
+            transform: translateY(-8px);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.08);
+        }
+
+        .service-content {
+            padding: 2.5rem;
+        }
+
+        .service-card h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2.5rem 2rem;
+            background: var(--forest);
+            color: white;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        /* Floating Call Button */
+        .floating-call-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(122, 157, 111, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .floating-call-btn:hover {
+            background: var(--sage-dark);
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(122, 157, 111, 0.6);
+        }
+
+        .floating-call-btn::before {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .floating-call-btn:hover::after {
+            content: 'Call Us';
+            position: absolute;
+            right: 85px;
+            background: var(--forest);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            body {
+                font-size: 17px;
+            }
+
+            h1 {
+                font-size: 2.25rem;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                height: 55px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 1.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <img src="Website images/logo updated.svg" alt="C&A Support Group" class="logo">
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="index.html#contact" class="cta-button">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="services-container">
+            <div class="section-header">
+                <h1>Our Services</h1>
+                <p class="section-intro">Private, non-clinical in-home support designed to help you maintain independence, wellbeing, and comfort at home.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="Website images/Ashleigh CnA.webp" alt="In Home Support" class="service-image">
+                    <div class="service-content">
+                        <h2>In Home Support</h2>
+                        <p>Friendly, personalised assistance with everyday household tasks including light cleaning, meal preparation, laundry, and home organisation to maintain a safe and comfortable living environment.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="Website images/Charlie CnA.webp" alt="Daily Living Assistance" class="service-image">
+                    <div class="service-content">
+                        <h2>Daily Living Assistance</h2>
+                        <p>Support with day-to-day activities including shopping assistance, transport to appointments, community access, and help with daily routines on a private, non-clinical basis.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="Website images/Ashleigh CnA.webp" alt="Family & Carer Support" class="service-image">
+                    <div class="service-content">
+                        <h2>Support for Family & Carers</h2>
+                        <p>Short-term and ongoing private support to assist families and informal carers. Flexible support to reduce pressure and provide peace of mind for you and your loved ones.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="Website images/Charlie CnA.webp" alt="Companionship" class="service-image">
+                    <div class="service-content">
+                        <h2>Companionship & Social Support</h2>
+                        <p>Social connection, conversation, and support with everyday activities. Reducing isolation and supporting emotional wellbeing through friendly visits and shared activities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 C&A Support Group. All rights reserved. Serving Western Sydney with pride.</p>
+    </footer>
+
+    <!-- Floating Call Button -->
+    <a href="tel:+61412641153" class="floating-call-btn" aria-label="Call us"></a>
+</body>
+</html>
