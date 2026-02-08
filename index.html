@@ -132,6 +132,105 @@
             box-shadow: 0 4px 12px rgba(122, 157, 111, 0.4);
         }
 
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--forest);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 5rem 2rem 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 1rem 0;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.15rem;
+            border-bottom: 1px solid var(--soft-beige);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--sage-dark);
+            padding-left: 0.5rem;
+        }
+
+        .mobile-nav a.cta-button {
+            background: var(--sage);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+            border-bottom: none;
+        }
+
+        .mobile-nav a.cta-button:hover {
+            background: var(--sage-dark);
+            padding-left: 1rem;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+        }
+
         /* Hero Section */
         .hero {
             padding: 6rem 2rem;
@@ -468,18 +567,20 @@
             position: relative;
             margin-top: 3rem;
             max-width: 100%;
-            overflow: hidden;
+            overflow: visible; /* Allow side cards to be visible */
         }
 
         .carousel-inner {
             position: relative;
-            padding: 0 15%;
+            padding: 0;
+            overflow: hidden; /* Prevent horizontal scroll */
         }
 
         .carousel-track {
             display: flex;
             transition: transform 0.5s ease;
             align-items: center;
+            padding: 0 15%; /* Space for preview cards */
         }
 
         .carousel-slide {
@@ -510,7 +611,7 @@
             pointer-events: auto;
         }
 
-        .service-card-carousel:hover {
+        .carousel-slide.active .service-card-carousel:hover {
             border-color: var(--sage);
             box-shadow: 0 12px 32px rgba(122, 157, 111, 0.2);
             transform: scale(1.02) translateY(-8px);
@@ -831,6 +932,15 @@
                 display: none;
             }
 
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .mobile-nav,
+            .mobile-overlay {
+                display: block;
+            }
+
             /* Hero Section Mobile - Simplified */
             .hero {
                 padding: 3.5rem 1.5rem;
@@ -911,10 +1021,16 @@
             /* Carousel Mobile - Full width, cleaner */
             .carousel-wrapper {
                 margin-top: 2rem;
+                overflow: hidden; /* No overflow on mobile */
             }
 
             .carousel-inner {
                 padding: 0;
+                overflow: hidden;
+            }
+
+            .carousel-track {
+                padding: 0; /* Remove desktop padding */
             }
 
             .carousel-slide {
@@ -924,8 +1040,8 @@
 
             .service-card-carousel {
                 max-width: 100%;
-                opacity: 1; /* Always full opacity on mobile */
-                transform: scale(1); /* Always full scale on mobile */
+                opacity: 1 !important; /* Always full opacity on mobile */
+                transform: scale(1) !important; /* Always full scale on mobile */
             }
 
             .service-image-carousel {
@@ -1157,14 +1273,37 @@
                 font-size: 1rem;
             }
 
-            /* Carousel Extra Small - Full width */
+            /* Carousel Extra Small - Convert to stacked grid */
+            .carousel-wrapper {
+                overflow: visible;
+            }
+
+            .carousel-inner {
+                overflow: visible;
+                padding: 0;
+            }
+
+            .carousel-track {
+                display: block; /* Stack cards instead of flex */
+                transform: none !important; /* Disable carousel transform */
+                padding: 0;
+            }
+
             .carousel-slide {
                 min-width: 100%;
-                padding: 0 0.35rem;
+                padding: 0;
+                margin-bottom: 1.5rem;
+                opacity: 1 !important;
+            }
+
+            .service-card-carousel {
+                opacity: 1 !important;
+                transform: scale(1) !important;
+                pointer-events: auto !important;
             }
 
             .service-image-carousel {
-                height: 200px;
+                height: 180px;
             }
 
             .service-content-carousel {
@@ -1172,24 +1311,22 @@
             }
 
             .service-card-carousel h3 {
-                font-size: 1.25rem;
-                margin-bottom: 0.75rem;
+                font-size: 1.2rem;
+                margin-bottom: 0.65rem;
             }
 
             .service-card-carousel p {
-                font-size: 0.9rem;
-                line-height: 1.55;
+                font-size: 0.88rem;
+                line-height: 1.5;
             }
 
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+            /* Hide carousel controls on very small screens */
+            .carousel-nav {
+                display: none;
             }
 
-            .carousel-dot {
-                width: 8px;
-                height: 8px;
+            .carousel-dots {
+                display: none;
             }
 
             /* Team Extra Small */
@@ -1300,6 +1437,11 @@
     <!-- Header -->
     <header class="header">
         <div class="header-container">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <img src="Website images/logo-updated.svg" alt="C&A Support Group" class="logo">
             <nav class="nav">
                 <a href="#home">Home</a>
@@ -1309,6 +1451,16 @@
             </nav>
         </div>
     </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home">Home</a>
+        <a href="#team">Our Team</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Our Services</a>
+        <a href="#contact" class="cta-button">Contact Us</a>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1508,6 +1660,32 @@
     <a href="tel:+61412641153" class="floating-call-btn" aria-label="Call us"></a>
 
     <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+
+        function toggleMobileMenu() {
+            mobileMenuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileNav.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Carousel
         let currentSlide = 0;
         const track = document.getElementById('carouselTrack');
         const slides = document.querySelectorAll('.carousel-slide');
